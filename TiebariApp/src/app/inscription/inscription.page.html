@@ -1,0 +1,46 @@
+
+<ion-content padding>
+  <form [formGroup]="signupForm">
+  <div class="padding">
+    <div class="logo">
+      <ion-icon color="light" name="contact"></ion-icon>
+    </div>
+
+    <ion-item>
+      <ion-label color="light" position="stacked">Email</ion-label>
+      <ion-input color="light" type="mail" placeholder="Adresse email" formControlName="email" [class.invalid]="!signupForm.controls['email'].valid
+       && signupForm.controls['email'].touched">
+
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!signupForm.controls['email'].valid
+      && signupForm.controls['email'].touched"
+    >
+      <ion-label>Please enter a valid email.</ion-label>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label color="light" position="stacked">Mot de passe</ion-label>
+      <ion-input color="light" type="password" placeholder="Mot de passe" formControlName="password" [class.invalid]="!signupForm.controls['password'].valid
+      && signupForm.controls['password'].touched">
+
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!signupForm.controls['password'].valid  &&
+      signupForm.controls['password'].touched"
+    >
+      <ion-label>Your password needs more than 6 characters.</ion-label>
+    </ion-item>
+
+
+    <ion-button  color="light" expand="block" shape="round" fill="outline" (click)="signupUser(signupForm)"[disabled]="!signupForm.valid">
+      Inscription</ion-button>
+
+  </div>
+  </form>
+</ion-content>

@@ -1,6 +1,6 @@
 
-
-<ion-content>
+<ion-content padding>
+<form [formGroup]="loginForm">
 
   <div class="padding">
     <div class="logo">
@@ -8,18 +8,51 @@
     </div>
 
     <ion-item>
-      <ion-label color="light">Email</ion-label>
-      <ion-input color="light" type="mail" placeholder="Adresse email"></ion-input>
+      <ion-label color="light" position="stacked">Email</ion-label>
+      <ion-input color="light" type="mail" placeholder="Adresse email"
+      [class.invalid]="!loginForm.controls['email'].valid &&
+      loginForm.controls['email'].touched"
+      >
+
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!loginForm.controls['email'].valid &&
+       loginForm.controls['email'].touched"
+    >
+      <ion-label>Please enter a valid email address.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label color="light">Mot de passe</ion-label>
-      <ion-input color="light" type="password" placeholder="Mot de passe"></ion-input>
+      <ion-label color="light" position="stacked">Mot de passe</ion-label>
+      <ion-input color="light" type="password" placeholder="Mot de passe"
+                 [class.invalid]="!loginForm.controls['password'].valid
+                 && loginForm.controls['password'].touched"
+      >
+
+      </ion-input>
+
+      <ion-item
+              class="error-message"
+              *ngIf="!loginForm.controls['password'].valid
+      && loginForm.controls['password'].touched"
+      >
+        <ion-label>Your password needs more than 6 characters.</ion-label>
+      </ion-item>
+
     </ion-item>
 
-    <ion-button color="light" expand="block" shape="round" fill="outline">Connexion</ion-button>
-    <ion-button  color="light" expand="block" shape="round" fill="outline">Inscription</ion-button>
-
+    <ion-button color="light" expand="block" shape="round" fill="outline" (click)="loginUser(loginForm)" [disabled]="!loginForm.valid">Connexion</ion-button>
   </div>
+</form>
 
+
+  <ion-button expand="block" fill="clear" routerLink="/inscription">
+    Create a new account
+  </ion-button>
+
+  <ion-button expand="block" fill="clear" routerLink="/reset-password">
+    I forgot my password :(
+  </ion-button>
 </ion-content>
